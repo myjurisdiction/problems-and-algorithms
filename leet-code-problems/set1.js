@@ -86,28 +86,6 @@ function reverseInteger_v2(num) {
 
 // sample - pwwkew
 // so this approach has taken me linear time to find the longest substring
-function longestSubstring(str) {
-  const map = new Map();
-  let pointer_1 = 0,
-    pointer_2 = 0,
-    max = 0;
-
-  while (pointer_2 < str.length) {
-    if (!map.has(str.charAt(pointer_2))) {
-      map.set(str.charAt(pointer_2), pointer_2);
-      pointer_2 += 1;
-      max = Math.max(map.size, max);
-    } else {
-      map.delete(str.charAt(pointer_1));
-      pointer_1 += 1;
-    }
-  }
-
-  return {
-    map,
-    max,
-  };
-}
 
 // console.log(longestSubstring("pwwkew"));
 
