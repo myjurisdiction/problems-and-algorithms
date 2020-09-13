@@ -5,12 +5,6 @@
  * @param {string} str
  */
 
-/**
- *  PSEUDO CODE
- *
- *
- */
-
 function longestSubstring(str) {
   const map = new Map();
   let pointer_1 = 0,

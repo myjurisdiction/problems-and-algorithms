@@ -1,26 +1,19 @@
 function isPalindrome(s) {
   let i = 0,
     j = s.length - 1;
-
-  if (s === "bb") console.log("yes i have got it !!!");
   while (i <= j) {
     if (s.charAt(i) === s.charAt(j)) {
       i++;
       j--;
-    } else {
-      return false;
-    }
+    } else return false;
   }
-
   return true;
 }
-
 /**
- *
  * @param {string} s
- *
  * so, what we are doing is that we are creating all possible combinations of the string and then verifying that is it truly a palindrome or not
  */
+
 function longestPalindromicSubstring(s) {
   let best_len = 0,
     best_str = "";
@@ -28,7 +21,6 @@ function longestPalindromicSubstring(s) {
     for (let j = i; j < s.length; j++) {
       let len = j - i + 1;
       let subs = s.substring(i, len);
-
       if (len > best_len && isPalindrome(subs)) {
         best_len = len;
         best_str = subs;
@@ -39,7 +31,7 @@ function longestPalindromicSubstring(s) {
   return best_str;
 }
 
-console.log(longestPalindromicSubstring("abb"));
+console.log(longestPalindromicSubstring("ababad"));
 
 // solution 2
 function longestPalindromicSubstring_v2(s) {
@@ -69,4 +61,4 @@ function expandAroundCorner(s, l, r) {
   return r - l - 1;
 }
 
-console.log(longestPalindromicSubstring_v2("abb"));
+console.log(longestPalindromicSubstring_v2("ababad"));
