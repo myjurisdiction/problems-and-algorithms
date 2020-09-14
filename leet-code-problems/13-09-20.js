@@ -18,7 +18,7 @@ root.right.right = new Node(4);
 root.left.left.left = new Node(7);
 root.left.left.right = new Node(2);
 
-root.right.left.left = new Node(5);
+root.right.right.left = new Node(5);
 root.right.right.right = new Node(1);
 
 function levelOrder(root) {
@@ -39,21 +39,22 @@ function levelOrder(root) {
 
 function path_sum_II(root, sum) {
   // const paths = new Array();
-  const array = new Array();
+  const container = new Array();
 
-  function findPath(root, sum, array) {
+  function findPath(root, sum, array, container) {
     if (!root) return false;
 
     // meaning the root is a leaf node
     // if leafNode's value === sum, then we hit the jack pot meaning this is the path
     if (!root.left && !root.right && root.val === sum) {
       array.push(root.val);
+      container.push(array);
       return true;
     }
 
     if (
-      findPath(root.left, sum - root.val, array) ||
-      findPath(root.right, sum - root.val, array)
+      findPath(root.left, sum - root.val, array, container) ||
+      findPath(root.right, sum - root.val, array, container)
     ) {
       array.push(root.val);
       return true;
@@ -62,20 +63,18 @@ function path_sum_II(root, sum) {
     return false;
   }
 
-  findPath(root, sum, array);
+  findPath(root, sum, (array = new Array()), container);
 
-  return array;
+  return container;
 }
 
 console.log(path_sum_II(root, 22));
-
-
 
 /**
  *
  * @param {root of a binary tree} root
  * @param {integer} sum
- * 
+ *
  * This is the another way to approach the problem, the iterative way !!
  */
 
@@ -111,6 +110,41 @@ function path_sum_II_v2(root, sum) {
 
 console.log(levelOrder(root));
 console.log(path_sum_II_v2(root, 22));
+
+
+/**
+ * 
+ * @param {object} root 
+ * @param {integer} sum 
+ * 
+ * Thiis function calls the findPaths function and fill up the container with the valid paths from root to leaf which summation matches the sum
+ */
+function path_sum_II_v3(root, sum) {
+  const container = new Array();
+  findPaths(root, sum, (array = new Array()), container);
+
+  return container;
+}
+
+
+function findPaths(root, sum, current, container) {
+  // my base case that if root is null, return root;
+  if (!root) return root;
+
+  // leaf node condition and check if leaf node's' value is equivalent to
+  current.push(root.val);
+  if (!root.left && !root.right && root.val === sum) {
+    container.push(current);
+    return;
+  }
+
+  // so in every recursive call we have to pass a copy of the current array
+  // so that we don't already pass the same current array over and over again
+  findPaths(root.left, sum - root.val, [...current], container);
+  findPaths(root.right, sum - root.val, [...current], container);
+}
+
+console.log(path_sum_II_v3(root, 22));
 
 /**
  * 
