@@ -12,7 +12,7 @@ node.left = new Node(2);
 node.right = new Node(2);
 node.left.left = new Node(3);
 node.left.right = new Node(4);
-node.right.left = new Node(3);
+node.right.left = new Node(4);
 node.right.right = new Node(3);
 
 function levelOrder(root) {

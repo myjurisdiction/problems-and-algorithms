@@ -34,6 +34,7 @@ class Bst {
   }
 
   get postOrder() {
+    if (!this.root) return [];
     const stack = new Array(),
       list = new Array();
     let root = this.root;
@@ -62,6 +63,7 @@ class Bst {
   }
 
   get levelOrder() {
+    if (!this.root) return [];
     const queue = [this.root],
       list = new Array();
     let temp;
@@ -78,6 +80,7 @@ class Bst {
   }
 
   get inOrder() {
+    if (!this.root) return [];
     let stack = new Array(),
       current = this.root,
       list = [];
@@ -104,6 +107,7 @@ class Bst {
   }
 
   get maxDepth_v2() {
+    if (!this.root) return 0;
     let queue = [this.root];
     let height = 0;
 
@@ -118,8 +122,10 @@ class Bst {
       while (nodeCount > 0) {
         let temp = queue.shift();
 
-        if (temp.left) queue.push(temp.left);
-        if (temp.right) queue.push(temp.right);
+        if (temp) {
+          if (temp.left) queue.push(temp.left);
+          if (temp.right) queue.push(temp.right);
+        }
 
         nodeCount--;
       }
@@ -133,7 +139,7 @@ class Bst {
 
 const bst = new Bst();
 
-const sampleArray = [10, 5, 15, 2, 3, 12, 17];
+const sampleArray = [10, 5, 15, 2, 3, 7, 12, 17];
 
 for (let el of sampleArray) {
   bst.insert(el);
@@ -146,3 +152,25 @@ console.log(bst.inOrder);
 console.log(bst.maxDepth());
 
 console.log(bst.maxDepth_v2);
+
+function pathSum(root, sum) {
+  const paths = new Array();
+  findPath(root, sum, (current = new Array()), paths);
+  return paths;
+}
+
+function findPath(root, sum, current, paths) {
+  if (!root) return;
+
+  current.push(root.val);
+  // check if the current root is leaf or not
+  if (!root.left && !root.right && root.val === sum) {
+    paths.push(current);
+    return;
+  }
+
+  findPath(root.left, sum - root.val, [...current], paths);
+  findPath(root.right, sum - root.val, [...current], paths);
+}
+
+console.log(pathSum(bst.root, 22));
