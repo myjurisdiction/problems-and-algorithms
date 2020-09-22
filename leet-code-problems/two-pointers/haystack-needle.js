@@ -53,21 +53,22 @@ function haystack_needle_better(haystack, needle) {
 }
 
 function prefixArray(needle) {
-  let array = Array.from({ length: needle.length }, () => 0),
+  // lps -> longest proper suffix
+  let lps = Array.from({ length: needle.length }, () => 0),
     i = 0,
     j = 1;
 
   while (j < needle.length) {
     if (needle.charAt(i) === needle.charAt(j)) {
-      array[j] = ++i;
+      lps[j] = ++i;
       j++;
     } else {
-      if (i) i = array[i - 1];
+      if (i) i = lps[i - 1];
       else j++;
     }
   }
 
-  return array;
+  return lps;
 }
 
 console.log(haystack_needle_better(haystack, needle));
