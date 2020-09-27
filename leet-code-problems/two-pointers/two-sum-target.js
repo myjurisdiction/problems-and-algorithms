@@ -34,3 +34,20 @@ function twoSum_v2(numbers, target) {
 }
 
 console.log(twoSum_v2([1, 2, 4, 4], 8));
+
+// in this case numbers are sorted.
+function another_approach(a, target) {
+  let i = 0,
+    j = a.length - 1;
+  // if numbers are sorted than we can make use of this property
+
+  while (i < j) {
+    if (a[i] + a[j] === target) return [i, j];
+    if (a[i] + a[j] < target) i++;
+    else j--;
+  }
+
+  return -1;
+}
+
+log(another_approach([1, 2, 4, 4], 8));
