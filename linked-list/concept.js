@@ -25,12 +25,10 @@ let Linked_list = class {
 
   print() {
     let temp = this.head;
-    let array = new Array();
     while (temp) {
-      array.push(temp.value);
+      console.log(temp.value);
       temp = temp.next;
     }
-    return array;
   }
 
   // removing the tail element from the linked list
@@ -144,29 +142,29 @@ let Linked_list = class {
   }
 
   reverseRecursively(node = this.head, container = new Array()) {
-    if(node.next) {
-        container.push(node.value);
-        this.reverseRecursively(node.next, container);
+    if (node.next) {
+      container.push(node.value);
+      this.reverseRecursively(node.next, container);
     } else {
-        return node
+      return node;
     }
     return container;
   }
 
-  delete (position) {
-      if(!this.head) {
-          return 'List is empty';
-      } else if (position <= 0) {
-          this.shift();
-      } else if (position >= this.length) {
-            this.pop();
-      } else {
-          let prevNode = this.get(position);
-          let currentNode = prevNode.next;
-          prevNode.next = currentNode.next;
-          this.length--;
-          return currentNode; 
-      }
+  delete(position) {
+    if (!this.head) {
+      return "List is empty";
+    } else if (position <= 0) {
+      this.shift();
+    } else if (position >= this.length) {
+      this.pop();
+    } else {
+      let prevNode = this.get(position);
+      let currentNode = prevNode.next;
+      prevNode.next = currentNode.next;
+      this.length--;
+      return currentNode;
+    }
   }
 };
 
@@ -178,39 +176,6 @@ for (let el of numbers) {
   node.push(el);
 }
 
-// node.pop()
+node.shift();
 
-// node.shift();
-
-// node.unshift('Keshav');
-
-//node.set('anyValue')
-
-console.log(node.get(3));
-
-// node.set(0, "this is awesome");
-
-node.set(
-  3,
-  "Use what talents you possess; the woods would be very silent if no birds sang there except those that sang best."
-);
-
-node.insert(2, "this is wonderful");
-
-node.insert(0, "fiest");
-node.insert(3, "Fight over bottle just happened now.");
-
-node.insert(100, "This is the last item");
-
-
-console.log(node.print());
-
-console.log(node.reverse());
-
-console.log(node.reverseRecursively());
-
-node.delete(2);
-
-node.delete(3);
-
-console.log(node.print());
+node.print();
