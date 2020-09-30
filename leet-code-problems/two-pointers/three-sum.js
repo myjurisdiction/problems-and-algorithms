@@ -1,3 +1,5 @@
+// this is an important two pointer question problem number -> 15
+
 const { log } = console;
 
 function threeSum(nums) {
